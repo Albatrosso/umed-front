@@ -15,7 +15,7 @@
     </div>
     <div v-scroll class="main-page__body-about-us">
       <img class="main-page__body-about-us_photo"
-           src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80"/>
+           src="../img/about_us.jpg"/>
       <div class="main-page__body-about-us-text">
       <h2 class="main-page__body-about-us_title">О нас</h2>
       <p class="main-page__body-about-us_value">
@@ -32,17 +32,23 @@
     <div v-scroll class="main-page__body-statistic">
         <h2 v-scroll class="main-page__body-statistic_headline">Ключевые показатели</h2>
         <div v-scroll class="main-page__body-statistic_list">
-            <b class="main-page__body-statistic_value">15</b>
-            <span class="main-page__body-statistic_text">филиалов</span>
-            <b class="main-page__body-statistic_value">9</b>
-            <span class="main-page__body-statistic_text">лет на рынке</span>
-            <b class="main-page__body-statistic_value">60</b>
-            <span class="main-page__body-statistic_text">партнеров</span>
+            <div class="main-page__body-statistic_wrapper">
+              <b class="main-page__body-statistic_value">15</b>
+              <span class="main-page__body-statistic_text">филиалов</span>
+            </div>
+            <div class="main-page__body-statistic_wrapper">
+              <b class="main-page__body-statistic_value">9</b>
+              <span class="main-page__body-statistic_text">лет на рынке</span>
+            </div>
+            <div class="main-page__body-statistic_wrapper">
+              <b class="main-page__body-statistic_value">60</b>
+              <span class="main-page__body-statistic_text">партнеров</span>
+            </div>
         </div>
       </div>
     <div v-scroll class="main-page__body-clients">
       <div v-scroll class="main-page__body-clients-title">
-        Наши клиенты
+        Наши партнеры
       </div>
       <div v-scroll class="main-page__body-clients-content-wrap">
         <div class="main-page__body-clients-content" v-for="client in clients" :key="client">
@@ -94,7 +100,7 @@ export default class HomePage extends Vue {
     position: fixed;
     top: 0;
     background-color: black;
-    z-index: 5;
+    z-index: 999;
     opacity: 0.3;
   }
   &__body {
@@ -102,7 +108,8 @@ export default class HomePage extends Vue {
     height: 100%;
   }
   &__body-carousel {
-    width: 100%
+    width: 100%;
+    z-index: 1;
   }
 
   &__body-carousel_overlay {
@@ -127,7 +134,7 @@ export default class HomePage extends Vue {
     font-weight: bold;
     font-size: 30px;
     padding: 20px;
-    margin: 0 0 0 60px;
+    margin: 0 0 0 15%;
     border: 5px solid #ffffff;
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -138,12 +145,10 @@ export default class HomePage extends Vue {
   }
 
   &__body-about-us{
-    margin: 30px 0 0 0;
     display: flex;
-    flex-flow: row-reverse;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 15% 0 15%;
+    padding: 50px 15% 0 15%;
     font-size: 20px;
   }
   &__body-about-us-text{
@@ -152,6 +157,7 @@ export default class HomePage extends Vue {
   &__body-about-us_photo {
     max-width: 400px;
     height: auto;
+    margin: 0 5% 0 0;
   }
   &__body-about-us_title {
     font-size: 32px;
@@ -161,6 +167,7 @@ export default class HomePage extends Vue {
   height: auto;
   }
   &__body-map {
+    z-index: -1;
     height: 500px;
     padding: 5% 15% 5% 15%;
   }
@@ -185,9 +192,11 @@ export default class HomePage extends Vue {
   }
   &__body-statistic_list{
     display: flex;
-    flex-flow: column;
+    flex-flow: wrap;
     align-items: center;
     list-style: none;
+    justify-content: space-around;
+    width: 60%;
   }
 
   &__body-statistic_value{
@@ -206,7 +215,7 @@ export default class HomePage extends Vue {
     display: flex;
     align-items: center;
     flex-flow: column;
-    padding: 50px 15% 0 15%;
+    padding: 80px 0 0 0;
   }
   &__body-clients-title {
     font-size: 35px;
