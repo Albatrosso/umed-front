@@ -10,7 +10,7 @@
           <span class="visually-hidden">Открыть/закрыть меню</span>
         </button>
       </div>
-      <ul class="page-header__list" v-if="menuOpened || isDesktop" hidden>
+      <ul class="page-header__list" v-if="menuOpened || isDesktop">
         <li class="page-header__item">
           <a class="page-header__link">Главная</a>
         </li>
