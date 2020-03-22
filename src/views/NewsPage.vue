@@ -15,13 +15,7 @@
       <ul class="news__list">
           <li class="news__list__item" v-for="item in news" :key="item.id">
             <router-link class="news__link" :to="`/news/${item.id}`">
-              <img class="news__img"
-                   :src="require(`../assets/img/${item.id}.jpg`)" alt="Санкт-Петербург">
-              <h2 class="news__title">{{ item.title }}</h2>
-              <time class="news__time" :datetime="item.dateTime">{{item.date}}</time>
-              <p class="news__subtitle">
-                {{item.text}}
-              </p>
+              <news-card :news-card="item"></news-card>
             </router-link>
           </li>
       </ul>
@@ -34,10 +28,12 @@
 import { Component, Vue} from 'vue-property-decorator';
 import newsPlaceholder from '../components/NewsPlaceholder.vue'
 import { mapGetters } from 'vuex';
+import NewsCard from '../components/NewsCard.vue';
 
 @Component({
   components: {
-    newsPlaceholder
+    newsPlaceholder,
+    'news-card': NewsCard,
   },
   computed: {
     ...mapGetters([
@@ -153,31 +149,6 @@ export default class News extends Vue {
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
       }
-    }
-    &__img {
-      width: 100%;
-      height: 175px;
-      margin-bottom: 15px;
-    }
-    &__title {
-      font-size: 20px;
-      text-align: center;
-      margin: 0 0 20px;
-      padding: 0 20px;
-    }
-    &__time {
-      font-size: 10px;
-      line-height: 10px;
-      text-align: right;
-      display: inline-block;
-      position: relative;
-      width: auto;
-      padding: 5px 8px;
-      margin-bottom: 15px;
-      margin-left: 20px;
-      background-color: #e7e7e7;
-      color: #6e6e6e;
-      border-radius: 20px;
     }
     &__subtitle {
       height: 50px;
