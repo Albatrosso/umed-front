@@ -13,7 +13,7 @@
         <div class="article__main">
           <img class="article__img" :src="require(`../assets/img/${newsPage.id}.jpg`)" alt="Чебоксары">
           <div class="article__text">
-            <p class="article__paragraph">{{newsPage.text}}</p>
+            <p class="article__paragraph">{{newsPage.description}}</p>
             <p class="article__paragraph">{{newsPage.event}}</p>
             <p class="article__paragraph">{{newsPage.place}}</p>
             <ul class="article__list" v-if="newsPage.org">{{newsPage.org.name}}
@@ -43,7 +43,7 @@ export default class NewPage extends Vue {
   newsPage = {};
 
   mounted() {
-    this.newsPage = this.$store.state.news[this.$route.params.id];
+    this.newsPage = this.$store.state.news1[this.$route.params.id - 1];
   }
 }
 </script>
