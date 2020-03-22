@@ -277,6 +277,12 @@ export default new Vuex.Store({
       context.commit('SET_NEWS', data);
     },
   },
+
+  getters: {
+    GET_NEW: (state) => {
+      return state.news1
+    }
+  },
   modules: {
   },
 });

@@ -9,26 +9,29 @@
       <router-link class="contact__back-link" to="/news">Назад к новостям</router-link>
       <article class="page-news__article">
         <h2 class="article__headline">{{newsPage.title}}</h2>
-        <time class="news__time news__time--main-page" datetime="2019-06-05">5 июня 2019</time>
-        <div class="article__main">
-          <img class="article__img" :src="require(`../assets/img/${newsPage.id}.jpg`)" alt="Чебоксары">
-          <div class="article__text">
-            <p class="article__paragraph">{{newsPage.description}}</p>
-            <p class="article__paragraph">{{newsPage.event}}</p>
-            <p class="article__paragraph">{{newsPage.place}}</p>
-            <ul class="article__list" v-if="newsPage.org">{{newsPage.org.name}}
-              <li class="article__item" v-for="item in newsPage.org.orgList" :key="newsPage.org.orgList.indexOf(item)">
-                {{item}}
-              </li>
-            </ul>
-            <p class="article__paragraph" v-if="newsPage.addition">
-              {{newsPage.addition}}
-            </p>
-            <p class="article__paragraph" v-if="newsPage.end">
-              {{newsPage.end}}
-            </p>
-          </div>
-        </div>
+<!--        <time class="news__time news__time&#45;&#45;main-page" datetime="2019-06-05">5 июня 2019</time>-->
+<!--        <div class="article__main">-->
+<!--          <img class="article__img" :src="require(`../assets/img/${newsPage.id}.jpg`)" alt="Чебоксары">-->
+<!--          <div class="article__text">-->
+<!--            <p class="article__paragraph">{{newsPage.description}}</p>-->
+<!--            <p class="article__paragraph">{{newsPage.event}}</p>-->
+<!--            <p class="article__paragraph">{{newsPage.place}}</p>-->
+<!--            <ul class="article__list" v-if="newsPage.org">{{newsPage.org.name}}-->
+<!--              <li class="article__item" v-for="item in newsPage.org.orgList" :key="newsPage.org.orgList.indexOf(item)">-->
+<!--                {{item}}-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--            <p class="article__paragraph" v-if="newsPage.addition">-->
+<!--              {{newsPage.addition}}-->
+<!--            </p>-->
+<!--            <p class="article__paragraph" v-if="newsPage.end">-->
+<!--              {{newsPage.end}}-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </div>-->
+        <pre class="article__text">
+          {{newsPage.text}}
+        </pre>
       </article>
     </div>
   </div>
@@ -37,13 +40,22 @@
 
 <script>
 import { Vue, Component } from 'vue-property-decorator';
+import { mapGetters } from 'vuex';
 
-@Component
+@Component({
+  computed: {
+    ...mapGetters([
+      'GET_NEW',
+    ]),
+  },
+})
 export default class NewPage extends Vue {
-  newsPage = {};
+  get newsPage() {
+    return this.GET_NEW[this.$route.params.id - 1];
+  }
 
   mounted() {
-    this.newsPage = this.$store.state.news1[this.$route.params.id - 1];
+    this.$store.dispatch('GET_NEWS');
   }
 }
 </script>
@@ -138,6 +150,12 @@ export default class NewPage extends Vue {
   .article {
     &__headline {
       margin-bottom: 35px;
+    }
+
+    &__text {
+      white-space: pre-wrap;
+      font-family: inherit;
+      margin: 0 auto;
     }
 
     &__main {

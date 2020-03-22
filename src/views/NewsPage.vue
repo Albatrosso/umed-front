@@ -5,19 +5,25 @@
       <div class="news__overlay"/>
       <h2 class="news__heading">Новости</h2>
     </div>
+
+    <div v-if="!news" class="news__placeholder">
+      <div v-for="i in 6" :key="i">
+        <news-placeholder/>
+      </div>
+    </div>
     <div class="news__wrapper">
       <ul class="news__list">
-        <li class="news__list__item" v-for="item in news" :key="item.id">
-          <router-link class="news__link" :to="`/news/${item.id}`">
-            <img class="news__img"
-                 :src="require(`../assets/img/${item.id}.jpg`)" alt="Санкт-Петербург">
-            <h2 class="news__title">{{ item.title }}</h2>
-            <time class="news__time" :datetime="item.dateTime">{{item.date}}</time>
-            <p class="news__subtitle">
-              {{item.description}}
-            </p>
-          </router-link>
-        </li>
+          <li class="news__list__item" v-for="item in news" :key="item.id">
+            <router-link class="news__link" :to="`/news/${item.id}`">
+              <img class="news__img"
+                   :src="require(`../assets/img/${item.id}.jpg`)" alt="Санкт-Петербург">
+              <h2 class="news__title">{{ item.title }}</h2>
+              <time class="news__time" :datetime="item.dateTime">{{item.date}}</time>
+              <p class="news__subtitle">
+                {{item.text}}
+              </p>
+            </router-link>
+          </li>
       </ul>
     </div>
   </div>
@@ -25,20 +31,27 @@
 </template>
 
 <script>
-import { Component, Vue, Watch } from 'vue-property-decorator';
-
+import { Component, Vue} from 'vue-property-decorator';
+import newsPlaceholder from '../components/NewsPlaceholder.vue'
+import { mapGetters } from 'vuex';
 
 @Component({
+  components: {
+    newsPlaceholder
+  },
+  computed: {
+    ...mapGetters([
+      'GET_NEW',
+    ]),
+  },
 })
 export default class News extends Vue {
-  news = [];
+  get news() {
+     return this.GET_NEW;
+  }
 
   mounted() {
     this.$store.dispatch('GET_NEWS');
-    setTimeout(() =>   this.news = this.$store.state.news1, 300);
-    setTimeout(() => console.log(this.news),300);
-
-
   }
 
 
@@ -47,6 +60,13 @@ export default class News extends Vue {
 
 <style scoped lang="scss">
   .news {
+
+    &__placeholder {
+      display: flex;
+      justify-content: space-around;
+      flex-flow: wrap;
+      align-items: center;
+    }
     &__headline {
       margin: 0 0 75px;
       padding: 85px 0;
