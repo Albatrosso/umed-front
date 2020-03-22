@@ -14,7 +14,7 @@
             <h2 class="news__title">{{ item.title }}</h2>
             <time class="news__time" :datetime="item.dateTime">{{item.date}}</time>
             <p class="news__subtitle">
-              {{item.text}}
+              {{item.description}}
             </p>
           </router-link>
         </li>
@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
+
 
 @Component({
 })
@@ -33,8 +34,14 @@ export default class News extends Vue {
   news = [];
 
   mounted() {
-    this.news = this.$store.state.news;
+    this.$store.dispatch('GET_NEWS');
+    setTimeout(() =>   this.news = this.$store.state.news1, 300);
+    setTimeout(() => console.log(this.news),300);
+
+
   }
+
+
 }
 </script>
 
