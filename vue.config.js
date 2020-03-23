@@ -17,7 +17,7 @@ module.exports = {
   },
 
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/home/h003308756/mojacms.ru/docs/'
+    ? '/umed-ui/'
     : '/',
 };
 
