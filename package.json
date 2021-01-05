@@ -9,7 +9,7 @@
     "deploy": "/bin/zsh  /Users/nikita/WebstormProjects/work/own/umed-ui/deploy.sh"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "core-js": "^3.4.4",
     "element-ui": "^2.13.0",
     "leaflet": "^1.6.0",
